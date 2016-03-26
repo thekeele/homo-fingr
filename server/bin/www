@@ -4,7 +4,7 @@
  * Module dependencies.
  */
 var app = require('../app');
-var config = require('./config.json')[app.get('env')];
+var config = require('../config/config.json')[app.get('env')];
 var debug = require('debug')('homo-fingr:server');
 var http = require('http');
 
