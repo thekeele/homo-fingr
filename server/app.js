@@ -29,9 +29,6 @@ mongoose.connection.on('error', console.error);
 mongoose.connect(configDB.url);
 console.log('Database connection established');
 
-require('./config/passport')(passport);
-console.log('Passport configuration loaded');
-
 /*
   Express App Set Up
 */
@@ -49,6 +46,7 @@ app.use(session({
 }));
 app.use(passport.initialize());
 app.use(passport.session());
+require('./config/passport')(passport);
 console.log('Express app configured');
 
 /*
