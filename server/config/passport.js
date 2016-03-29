@@ -4,8 +4,7 @@
 */
 
 var LocalStrategy = require('passport-local').Strategy;
-// var User = require('../models/user');
-console.log('passport');
+var User = require('../models/user');
 
 module.exports = function(passport) {
   /*
@@ -13,17 +12,10 @@ module.exports = function(passport) {
     - gives persistent login sessions
     - passport serializes and unserializes users out of session
   */
-  // passport.serializeUser(function(user, done) {
-  //   console.log('User Serialized');
-  //   done(null, user.id);
-  // });
-
-  // passport.deserializeUser(function(id, done) {
-  //   console.log('User Deserialized');
-  //   User.findById(id, function(err, user) {
-  //     done(err, user);
-  //   });
-  // });
+  console.log('passport');
+  passport.use(new LocalStrategy(User.authenticate()));
+  passport.serializeUser(User.serializeUser());
+  passport.deserializeUser(User.deserializeUser());
 
   /*
     Local Registration
