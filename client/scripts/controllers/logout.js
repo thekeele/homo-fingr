@@ -5,7 +5,7 @@ angular.module('homoFingr').controller('logoutController',
   $scope.logout = function() {
     AuthService.logout()
       .then(function() {
-        $location.path('/login');
+        $location.path('/');
       });
   };
 
