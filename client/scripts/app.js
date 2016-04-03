@@ -4,21 +4,25 @@ homoFingr.config(function($routeProvider) {
   $routeProvider
     .when('/', {
       templateUrl: '../partials/home.html',
-      access: {restricted: true}
+      access: {restricted: false}
     })
     .when('/login', {
       templateUrl: '../partials/login.html',
       controller: 'loginController',
       access: {restricted: false}
     })
-    .when('/logout', {
-      controller: 'logoutController',
-      access: {restricted: true}
-    })
     .when('/register', {
       templateUrl: '../partials/register.html',
       controller: 'registerController',
       access: {restricted: false}
+    })
+    .when('/profile', {
+      templateUrl: '../partials/profile.html',
+      access: {restricted: true}
+    })
+    .when('/logout', {
+      controller: 'logoutController',
+      access: {restricted: true}
     })
     .when('/one', {
       template: '<h1>this is page one</h1>',
@@ -35,10 +39,12 @@ homoFingr.config(function($routeProvider) {
 
 homoFingr.run(function($rootScope, $location, $route, AuthService) {
   $rootScope.$on('$routeChangeStart', function(event, next, current) {
-    AuthService.getUserStatus();
+    // AuthService.getUserStatus();
+    console.log('next.access.restricted: ', next.access.restricted);
+    console.log('AuthService.isLoggedIn(): ', AuthService.isLoggedIn());
     if (next.access.restricted && !AuthService.isLoggedIn()) {
-      $location.path('/login');
+      $location.path('/');
       $route.reload();
     }
-  })
+  });
 });

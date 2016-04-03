@@ -8,7 +8,7 @@ angular.module('homoFingr').factory('AuthService',
     // return available functions for use in the controllers
     return ({
       isLoggedIn: isLoggedIn,
-      getUserStatus: getUserStatus,
+      // getUserStatus: getUserStatus,
       login: login,
       logout: logout,
       register: register
@@ -22,21 +22,21 @@ angular.module('homoFingr').factory('AuthService',
       }
     }
 
-    function getUserStatus() {
-      $http.get('/api/status')
-      // handle success
-      .success(function (data) {
-        if(data.status){
-          user = true;
-        } else {
-          user = false;
-        }
-      })
-      // handle error
-      .error(function (data) {
-        user = false;
-      });
-    }
+    // function getUserStatus() {
+    //   $http.get('/api/status')
+    //   // handle success
+    //   .success(function (data) {
+    //     if(data.status){
+    //       user = true;
+    //     } else {
+    //       user = false;
+    //     }
+    //   })
+    //   // handle error
+    //   .error(function (data) {
+    //     user = false;
+    //   });
+    // }
 
     function login(username, password) {
 
@@ -101,6 +101,7 @@ angular.module('homoFingr').factory('AuthService',
         // handle success
         .success(function (data, status) {
           if(status === 200 && data.status){
+            user = true;
             deferred.resolve();
           } else {
             deferred.reject();
