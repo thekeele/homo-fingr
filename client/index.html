@@ -2,14 +2,67 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Homogeneous Fingerprint Project</title>
+  <title>homoFingr</title>
   <!-- styles -->
-  <link href="//maxcdn.bootstrapcdn.com/bootswatch/3.3.6/yeti/bootstrap.min.css" rel="stylesheet">
+  <link href="//maxcdn.bootstrapcdn.com/bootswatch/3.3.6/superhero/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 </head>
 <body ng-app="homoFingr">
 
+  <div class="bs-component">
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#/">dev.keele</a>
+        </div>
+
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav">
+            <li><a href="#/" class="btn btn-default">Home</a></li>
+            <li><a href="#/profile" class="btn btn-default">Profile</a></li>
+            <li><a href="#/one" class="btn btn-default">One</a></li>
+            <li><a href="#/two" class="btn btn-default">Two</a></li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="#/register" class="btn btn-default btn-lg">Register</a></li>
+            <li><a href="#/login" class="btn btn-primary btn-lg">Login</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </div>
+
   <div class="container">
     <div ng-view></div>
+  </div>
+
+  <div class="footer text-center">
+    <p>
+      <span class="poweredby">
+        <a href="https://digitalocean.com" target="_blank"><img src="public/images/do_logo.png" width="300px" height="50px" alt="Ghost"/></a>
+      </span>
+      <span class="fa-stack fa-3x">
+        <a href="https://github.com/thekeele"><i class="fa fa-github fa-stack-1x" ></i></a>
+      </span>
+      <span class="fa-stack fa-3x">
+        <a href="https://twitter.com/thekeele"><i class="fa fa-twitter fa-stack-1x"></i></a>
+      </span>
+      <span class="fa-stack fa-3x">
+        <a href="http://keele.me"><i class="fa fa-male fa-stack-1x"></i></a>
+      </span>
+    </p>
+
+    <p class="love">Made with
+      <span class="fa-stack fa-2x">
+        <i class="fa fa-heart fa-stack-1x" style="color:red"></i>
+      </span> by Mark Keele
+    </p>
   </div>
 
   <!-- scripts -->
