@@ -8,15 +8,16 @@
   - pull in required modules
 */
 var express = require('express');
-var session = require('express-session');
 var mongoose = require('mongoose');
 var passport = require('passport');
 
-var path = require('path');
-var favicon = require('serve-favicon');
-var logger = require('morgan');
+var morgan = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var session = require('express-session');
+var MongoStore = require('connect-mongo')(session);
+var favicon = require('serve-favicon');
+var path = require('path');
 
 var app = express();
 console.log('Server modules imported successfully');
@@ -29,24 +30,30 @@ mongoose.connection.on('error', console.error);
 mongoose.connect(configDB.url);
 console.log('Database connection established');
 
+require('./config/passport')(passport);
+console.log('Passport config loaded');
+
 /*
   Express App Set Up
 */
+app.use(express.static(path.join(__dirname, '../client')));
 app.use(favicon(path.join(__dirname, '../client/public/images', 'favicon.ico')));
-app.use(logger('dev'));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+
+app.use(morgan('dev'));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, '../client/public')));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: true}));
 
 app.use(session({
-  secret: 'pants',
+  secret: 'session-secret',
+  name: 'session-name',
   resave: false,
-  saveUninitialized: false
+  saveUninitialized: false,
+  store: new MongoStore({ url: configDB.url })
 }));
 app.use(passport.initialize());
 app.use(passport.session());
-require('./config/passport')(passport);
+
 console.log('Express app configured');
 
 /*
@@ -56,9 +63,10 @@ require('./routes/api.js')(app, passport);
 console.log('Routes loaded with app and passport');
 
 // load SPA
-// app.get('*', function(req, res) {
-//   res.sendFile(path.join(__dirname, '../client', 'index.html'));
-// });
+app.get('*', function(req, res) {
+  res.sendFile(path.join(__dirname, '../client', 'index.html'));
+});
+console.log('Loaded SPA');
 
 /*
   Error handlers
