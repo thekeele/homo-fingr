@@ -20,7 +20,10 @@ module.exports = function(app, passport) {
         return res.status(500).json({ status: 'Username exists' });
       }
 
-      return res.status(200).json({ status: 'Registration successful'});
+      req.login(user, function(err) {
+        if (err) { return next(err); }
+        return res.status(200).json({ status: 'Register successful'});
+      });
     })(req, res, next);
   });
 
