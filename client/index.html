@@ -5,9 +5,10 @@
   <title>homoFingr</title>
   <!-- styles -->
   <link href="//maxcdn.bootstrapcdn.com/bootswatch/3.3.6/superhero/bootstrap.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+  <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href="./public/stylesheets/style.css" rel="stylesheet">
 </head>
-<body ng-app="homoFingr">
+<body ng-app="homoFingr" ng-controller="FingerprintController">
 
   <div class="bs-component">
     <nav class="navbar navbar-default">
@@ -30,8 +31,8 @@
             <li><a href="#/two" class="btn btn-default">Two</a></li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="#/register" class="btn btn-default btn-lg">Register</a></li>
-            <li><a href="#/login" class="btn btn-primary btn-lg">Login</a></li>
+            <li><a href="#/register" class="btn btn-default">Register</a></li>
+            <li><a href="#/login" class="btn btn-primary">Login</a></li>
           </ul>
         </div>
       </div>
@@ -58,9 +59,9 @@
       </span>
     </p>
 
-    <p class="love">Made with
+    <p>Made with
       <span class="fa-stack fa-2x">
-        <i class="fa fa-heart fa-stack-1x" style="color:red"></i>
+        <i id="heart" class="fa fa-heart fa-stack-1x"></i>
       </span> by Mark Keele
     </p>
   </div>
@@ -70,11 +71,14 @@
   <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.9/angular.min.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.9/angular-route.min.js"></script>
+  <script src="//cdn.jsdelivr.net/fingerprintjs2/1.1.1/fingerprint2.min.js"></script>
+  <script src="//l2.io/ip.js?var=userip" type="text/javascript"></script>
 
   <script src="scripts/app.js"></script>
   <script src="scripts/controllers/logout.js"></script>
   <script src="scripts/controllers/login.js"></script>
   <script src="scripts/controllers/register.js"></script>
+  <script src="scripts/controllers/fingerprint.js"></script>
   <script src="scripts/services/auth.js"></script>
 </body>
 </html>
