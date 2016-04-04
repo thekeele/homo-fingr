@@ -47,4 +47,11 @@ homoFingr.run(function($rootScope, $location, $route, AuthService) {
       $route.reload();
     }
   });
+
+  console.log('fingerprint controller userip', userip);
+  console.log('fingerprint controller getUsername', AuthService.getUsername());
+  new Fingerprint2().get(function(result, components){
+    console.log(result); //a hash, representing your device fingerprint
+    console.log(components); // an array of FP components
+  });
 });

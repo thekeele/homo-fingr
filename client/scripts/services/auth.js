@@ -4,10 +4,12 @@ angular.module('homoFingr').factory('AuthService',
 
     // create user variable
     var user = null;
+    var name = null;
 
     // return available functions for use in the controllers
     return ({
       isLoggedIn: isLoggedIn,
+      getUsername: getUsername,
       // getUserStatus: getUserStatus,
       login: login,
       logout: logout,
@@ -15,10 +17,18 @@ angular.module('homoFingr').factory('AuthService',
     });
 
     function isLoggedIn() {
-      if(user) {
+      if (user) {
         return true;
       } else {
         return false;
+      }
+    }
+
+    function getUsername() {
+      if (name) {
+        return name;
+      } else {
+        return 'no name';
       }
     }
 
@@ -39,7 +49,6 @@ angular.module('homoFingr').factory('AuthService',
     // }
 
     function login(username, password) {
-
       // create a new instance of deferred
       var deferred = $q.defer();
 
@@ -50,6 +59,7 @@ angular.module('homoFingr').factory('AuthService',
         .success(function (data, status) {
           if(status === 200 && data.status){
             user = true;
+            name = username;
             deferred.resolve();
           } else {
             user = false;
@@ -64,11 +74,9 @@ angular.module('homoFingr').factory('AuthService',
 
       // return promise object
       return deferred.promise;
-
     }
 
     function logout() {
-
       // create a new instance of deferred
       var deferred = $q.defer();
 
@@ -77,6 +85,7 @@ angular.module('homoFingr').factory('AuthService',
         // handle success
         .success(function (data) {
           user = false;
+          name = null;
           deferred.resolve();
         })
         // handle error
@@ -87,11 +96,9 @@ angular.module('homoFingr').factory('AuthService',
 
       // return promise object
       return deferred.promise;
-
     }
 
     function register(username, password) {
-
       // create a new instance of deferred
       var deferred = $q.defer();
 
@@ -102,19 +109,21 @@ angular.module('homoFingr').factory('AuthService',
         .success(function (data, status) {
           if(status === 200 && data.status){
             user = true;
+            name = username;
             deferred.resolve();
           } else {
+            user = false;
             deferred.reject();
           }
         })
         // handle error
         .error(function (data) {
+          user = false;
           deferred.reject();
         });
 
       // return promise object
       return deferred.promise;
-
     }
 
 }]);
