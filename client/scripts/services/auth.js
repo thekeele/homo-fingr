@@ -28,7 +28,7 @@ angular.module('homoFingr').factory('AuthService',
       if (name) {
         return name;
       } else {
-        return 'no name';
+        return 'anonymous';
       }
     }
 
