@@ -20,7 +20,6 @@ angular.module('homoFingr').factory('FingerprintService',
         // handle success
         .success(function (data, status) {
           if(status === 200 && data.status){
-            curr_print = fingerprint;
             deferred.resolve();
           } else {
             deferred.reject();
