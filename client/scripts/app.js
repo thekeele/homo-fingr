@@ -24,6 +24,9 @@ homoFingr.config(function($routeProvider) {
     .otherwise({
       redirectTo: '/'
     });
+
+    // use the HTML5 History API
+    $locationProvider.html5Mode(true);
 });
 
 homoFingr.run(function($rootScope, $location, $route, AuthService, FingerprintService) {
