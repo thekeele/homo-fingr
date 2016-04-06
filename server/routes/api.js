@@ -124,7 +124,7 @@ module.exports = function(app, passport) {
 
       if (user === true && device_id === true) {
         console.log('Users Fingerprint: ' + data.device_id + ' already in database');
-        res.status(500).json({ status: 'Users Device ID exists' });
+        res.status(200).json({ status: 'Users Device ID exists' });
       } else {
         fingerprint.save(function(err) {
           if (err) {
