@@ -83,7 +83,7 @@ module.exports = function(app, passport) {
     })
   });
 
-  app.post('/api/fingers', function(req, res) {
+  app.post('//api/fingers', function(req, res) {
     console.log('post fingers');
     var data = req.body.fingerprint;
     var user = true;

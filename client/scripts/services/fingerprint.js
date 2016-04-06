@@ -15,7 +15,7 @@ angular.module('homoFingr').factory('FingerprintService',
       var deferred = $q.defer();
 
       // send a post request to the server
-      $http.post('/api/fingers',
+      $http.post('/fingers/api/fingers',
         {fingerprint: fingerprint})
         // handle success
         .success(function (data, status) {
