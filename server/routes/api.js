@@ -59,10 +59,10 @@ module.exports = function(app, passport) {
     res.status(200).json({ status: 'Logged Out' });
   });
 
-  app.get('/api/status', function(req, res) {
-    console.log('req.session ', JSON.stringify(req.session));
-    res.status(200).json({ status: 'isLoggedIn' });
-  });
+  // app.get('/api/status', function(req, res) {
+  //   console.log('req.session ', JSON.stringify(req.session));
+  //   res.status(200).json({ status: 'isLoggedIn' });
+  // });
 
   /*
     Fingerprint Routes
@@ -72,19 +72,22 @@ module.exports = function(app, passport) {
     - put /fingers/:finger_id
     - delete /fingers/:finger_id
   */
-  // app.get('/fingers', function(req, res) {
-  //   Fingerprint.find({}, function(err, users) {
+  // app.get('/api/fingers', function(req, res) {
+  //   Fingerprint.find({}, function(err, fingers) {
   //     if (err) {
   //       res.send(err);
   //     }
 
-  //     console.log('get /fingers');
-  //     res.json(users);
+  //     console.log('get fingers');
+  //     res.json(fingers);
   //   })
   // });
 
   app.post('/api/fingers', function(req, res) {
+    console.log('post fingers');
     var data = req.body.fingerprint;
+    var user = true;
+    var device_id = false;
 
     var fingerprint = new Fingerprint({
       username: data.username,
@@ -95,35 +98,54 @@ module.exports = function(app, passport) {
       components: data.components
     });
 
-    fingerprint.save(function(err) {
-      if (err) { throw err; }
+    console.log('find users');
+    Fingerprint.find({username: data.username}, function(err, results) {
+      if (err) {
+        res.send(err);
+      }
 
-      console.log('Fingerprint: ' + data.device_id + ' saved to database');
-      res.status(200).json({ status: 'Fingerprint: ' + data.device_id + ' saved to database' });
+      // user not in database
+      if(results.length === 0) {
+        console.log('user not in database');
+        user = false;
+      } else {
+        console.log('user is in the database');
+        // user is in the database
+        for(var i = 0; i < results.length; i++) {
+          console.log('data.device_id: ', data.device_id);
+          console.log('results[i].device_id: ', results[i].device_id);
+          // check if users device id is in the database
+          if (data.device_id === results[i].device_id) {
+            device_id = true;
+            break;
+          }
+        }
+      }
+
+      if (user === true && device_id === true) {
+        console.log('Users Fingerprint: ' + data.device_id + ' already in database');
+        res.status(500).json({ status: 'Users Device ID exists' });
+      } else {
+        fingerprint.save(function(err) {
+          if (err) {
+            res.send(err);
+          }
+
+          console.log('Fingerprint: ' + data.device_id + ' saved to database');
+          res.status(200).json({ status: 'Fingerprint: ' + data.device_id + ' saved to database' });
+        });
+      }
     });
-
-    // Fingerprint.findOne({device_id: data.device_id}, function(err, results) {
-    //   if (err) { throw err; }
-
-    //   if(!results) {
-    //     fingerprint.save(function(err) {
-    //       if (err) { throw err; }
-
-    //       console.log('Fingerprint: ' + data.device_id + ' saved to database');
-    //       res.status(200).json({ status: 'Fingerprint: ' + data.device_id + ' saved to database' });
-    //     });
-    //   }
-
-    //   console.log('Fingerprint: ' + data.device_id + ' already in database');
-    //   res.status(200).json({ status: 'Device ID exists' });
-    // });
   });
 
   app.get('/api/fingers/:username', function(req, res) {
+    console.log('find user');
     Fingerprint.find({username: req.params.username}, function(err, user) {
-      if (err) { throw err; }
+      if (err) {
+        res.send(err);
+      }
 
-      console.log('user: ' + user);
+      console.log('found user fp');
       res.status(200).json(user);
     });
   });
@@ -132,12 +154,12 @@ module.exports = function(app, passport) {
     Middleware
     - ensures that a user is logged in
   */
-  function isLoggedIn(req, res, next) {
-    console.log('req.session: ' + JSON.stringify(req.session));
-    if (req.isAuthenticated()) {
-      return next();
-    }
+  // function isLoggedIn(req, res, next) {
+  //   console.log('req.session: ' + JSON.stringify(req.session));
+  //   if (req.isAuthenticated()) {
+  //     return next();
+  //   }
 
-    return res.status(500).json({ err: 'Not authorized for request' });
-  }
+  //   return res.status(500).json({ err: 'Not authorized for request' });
+  // }
 };

@@ -8,7 +8,7 @@ var mongoose = require('mongoose');
 var fingerprintSchema = mongoose.Schema({
   username: {type: String, required: true},
   ip_address: {type: String, required: false},
-  device_id: {type: String, required: true, unique: false},
+  device_id: {type: String, required: true},
   timestamp: {type: Date, required: false},
   computation_time: {type: Number, required: false},
   components: {type: Array, required: true}
