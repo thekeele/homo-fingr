@@ -1,4 +1,6 @@
 <div ng-controller="FingerprintController">
-  <h1>Welcome {{name}}</h1>
-  <p>{{fp}}</p>
+  <h1>Welcome {{name}} | {{fp_count}} unique fingerprints</h1>
+  <div ng-repeat="fp in fps">
+    <hr><p>{{fp}}</p>
+  </div>
 </div>

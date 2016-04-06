@@ -29,9 +29,11 @@ angular.module('homoFingr').controller('FingerprintController',
         components: components
       };
 
-      FingerprintService.postFingerprint(fingerprint);
-      FingerprintService.getFingerprint(name).then(function(result) {
-        $scope.fp = result.data;
+      FingerprintService.postFingerprint(fingerprint).then(function() {
+        FingerprintService.getFingerprint(name).then(function(result) {
+          $scope.fp_count = result.data.length;
+          $scope.fps = result.data;
+        });
       });
     });
 
