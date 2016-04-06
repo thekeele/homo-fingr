@@ -1,3 +1,5 @@
+'use strict';
+
 var homoFingr = angular.module('homoFingr', ['ngRoute']);
 
 homoFingr.config(function($routeProvider) {

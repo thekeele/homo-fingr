@@ -1,3 +1,5 @@
+'use strict';
+
 angular.module('homoFingr').controller('loginController',
   ['$scope', '$location', 'AuthService',
   function ($scope, $location, AuthService) {

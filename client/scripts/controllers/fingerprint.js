@@ -1,3 +1,5 @@
+'use strict';
+
 angular.module('homoFingr').controller('FingerprintController',
   ['$scope', '$rootScope', '$location', 'AuthService', 'FingerprintService',
   function ($scope, $rootScope, $location, AuthService, FingerprintService) {

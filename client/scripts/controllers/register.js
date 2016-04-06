@@ -1,3 +1,5 @@
+'use strict';
+
 angular.module('homoFingr').controller('RegisterController',
   ['$scope', '$location', 'AuthService',
   function ($scope, $location, AuthService) {
@@ -18,7 +20,7 @@ angular.module('homoFingr').controller('RegisterController',
         // handle error
         .catch(function () {
           $scope.error = true;
-          $scope.errorMessage = "Something went wrong!";
+          $scope.errorMessage = "That username exists, try another";
           $scope.disabled = false;
           $scope.registerForm = {};
         });

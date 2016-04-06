@@ -1,3 +1,5 @@
+'use strict';
+
 angular.module('homoFingr').factory('FingerprintService',
   ['$q', '$timeout', '$http',
   function ($q, $timeout, $http) {

@@ -1,3 +1,5 @@
+'use strict';
+
 angular.module('homoFingr').factory('AuthService',
   ['$q', '$timeout', '$http',
   function ($q, $timeout, $http) {
