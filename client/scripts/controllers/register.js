@@ -1,9 +1,8 @@
-angular.module('homoFingr').controller('registerController',
+angular.module('homoFingr').controller('RegisterController',
   ['$scope', '$location', 'AuthService',
   function ($scope, $location, AuthService) {
 
     $scope.register = function () {
-
       // initial values
       $scope.error = false;
       $scope.disabled = true;
@@ -23,7 +22,5 @@ angular.module('homoFingr').controller('registerController',
           $scope.disabled = false;
           $scope.registerForm = {};
         });
-
     };
-
 }]);

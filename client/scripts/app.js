@@ -11,11 +11,6 @@ homoFingr.config(function($routeProvider) {
       controller: 'loginController',
       access: {restricted: false}
     })
-    .when('/register', {
-      templateUrl: '../partials/register.html',
-      controller: 'registerController',
-      access: {restricted: false}
-    })
     .when('/profile', {
       templateUrl: '../partials/profile.html',
       access: {restricted: true}
@@ -24,22 +19,13 @@ homoFingr.config(function($routeProvider) {
       controller: 'logoutController',
       access: {restricted: true}
     })
-    .when('/one', {
-      template: '<h1>this is page one</h1>',
-      access: {restricted: true}
-    })
-    .when('/two', {
-      template: '<h1>this is page two</h1>',
-      access: {restricted: true}
-    })
     .otherwise({
       redirectTo: '/'
     });
 });
 
-homoFingr.run(function($rootScope, $location, $route, AuthService) {
+homoFingr.run(function($rootScope, $location, $route, AuthService, FingerprintService) {
   $rootScope.$on('$routeChangeStart', function(event, next, current) {
-    // AuthService.getUserStatus();
     console.log('next.access.restricted: ', next.access.restricted);
     console.log('AuthService.isLoggedIn(): ', AuthService.isLoggedIn());
     if (next.access.restricted && !AuthService.isLoggedIn()) {
@@ -48,10 +34,28 @@ homoFingr.run(function($rootScope, $location, $route, AuthService) {
     }
   });
 
-  console.log('fingerprint controller userip', userip);
-  console.log('fingerprint controller getUsername', AuthService.getUsername());
-  new Fingerprint2().get(function(result, components){
-    console.log(result); //a hash, representing your device fingerprint
-    console.log(components); // an array of FP components
+  var fp = new Fingerprint2();
+  var d1 = new Date();
+  var name = AuthService.getUsername();
+
+  fp.get(function(result, components) {
+    var d2 = new Date();
+
+    var fingerprint = {
+      username: name,
+      ip_address: userip,
+      device_id: result,
+      timestamp: d2,
+      computation_time: d2 - d1,
+      components: components
+    };
+
+    $rootScope.browser = fingerprint.components[0].value;
+    $rootScope.language = fingerprint.components[1].value;
+    $rootScope.platform = fingerprint.components[11].value;
+    $rootScope.extensions = fingerprint.components[13].value;
+
+    console.log('fingerprint: ', fingerprint);
+    FingerprintService.postFingerprint(fingerprint);
   });
 });
