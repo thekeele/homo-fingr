@@ -6,7 +6,7 @@
   },
   "production": {
     "fingrPort": 9002,
-    "fingrHost": "10.132.213.230",
+    "fingrHost": "104.131.81.55",
     "errorHandlerOptions": {"dumpExceptions": false, "showStack": false}
   }
 }
