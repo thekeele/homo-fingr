@@ -4,6 +4,7 @@
 */
 
 var User = require('../models/user');
+var Fingerprint = require('../models/fingerprint');
 
 module.exports = function(app, passport) {
 
@@ -63,6 +64,74 @@ module.exports = function(app, passport) {
     res.status(200).json({ status: 'isLoggedIn' });
   });
 
+  /*
+    Fingerprint Routes
+    - get /fingers
+    - post /fingers
+    - get /fingers/:username
+    - put /fingers/:finger_id
+    - delete /fingers/:finger_id
+  */
+  // app.get('/fingers', function(req, res) {
+  //   Fingerprint.find({}, function(err, users) {
+  //     if (err) {
+  //       res.send(err);
+  //     }
+
+  //     console.log('get /fingers');
+  //     res.json(users);
+  //   })
+  // });
+
+  app.post('/api/fingers', function(req, res) {
+    var data = req.body.fingerprint;
+
+    var fingerprint = new Fingerprint({
+      username: data.username,
+      ip_address: data.ip_address,
+      device_id: data.device_id,
+      timestamp: data.timestamp,
+      computation_time: data.computation_time,
+      components: data.components
+    });
+
+    fingerprint.save(function(err) {
+      if (err) { throw err; }
+
+      console.log('Fingerprint: ' + data.device_id + ' saved to database');
+      res.status(200).json({ status: 'Fingerprint: ' + data.device_id + ' saved to database' });
+    });
+
+    // Fingerprint.findOne({device_id: data.device_id}, function(err, results) {
+    //   if (err) { throw err; }
+
+    //   if(!results) {
+    //     fingerprint.save(function(err) {
+    //       if (err) { throw err; }
+
+    //       console.log('Fingerprint: ' + data.device_id + ' saved to database');
+    //       res.status(200).json({ status: 'Fingerprint: ' + data.device_id + ' saved to database' });
+    //     });
+    //   }
+
+    //   console.log('Fingerprint: ' + data.device_id + ' already in database');
+    //   res.status(200).json({ status: 'Device ID exists' });
+    // });
+  });
+
+  app.get('/api/fingers/:username', function(req, res) {
+    Fingerprint.find({username: req.params.username}, function(err, user) {
+      if (err) { throw err; }
+
+      console.log('user: ' + user);
+      res.status(200).json(user);
+    });
+  });
+
+  /*
+    Middleware
+    - ensures that a user is logged in
+  */
   function isLoggedIn(req, res, next) {
     console.log('req.session: ' + JSON.stringify(req.session));
     if (req.isAuthenticated()) {
