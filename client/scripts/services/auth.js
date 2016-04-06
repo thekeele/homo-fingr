@@ -55,7 +55,7 @@ angular.module('homoFingr').factory('AuthService',
       var deferred = $q.defer();
 
       // send a post request to the server
-      $http.post('/api/login',
+      $http.post('/fingers/api/login',
         {username: username, password: password})
         // handle success
         .success(function (data, status) {
@@ -83,7 +83,7 @@ angular.module('homoFingr').factory('AuthService',
       var deferred = $q.defer();
 
       // send a get request to the server
-      $http.get('/api/logout')
+      $http.get('/fingers/api/logout')
         // handle success
         .success(function (data) {
           user = false;
@@ -105,7 +105,7 @@ angular.module('homoFingr').factory('AuthService',
       var deferred = $q.defer();
 
       // send a post request to the server
-      $http.post('/api/register',
+      $http.post('/fingers/api/register',
         {username: username, password: password})
         // handle success
         .success(function (data, status) {

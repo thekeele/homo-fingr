@@ -8,7 +8,7 @@ var Fingerprint = require('../models/fingerprint');
 
 module.exports = function(app, passport) {
 
-  app.post('/api/register', function(req, res, next) {
+  app.post('//api/register', function(req, res, next) {
     console.log('req.session: ' + JSON.stringify(req.session));
     passport.authenticate('local-register', function(err, user, info) {
       if (err) {
@@ -28,7 +28,7 @@ module.exports = function(app, passport) {
     })(req, res, next);
   });
 
-  app.post('/api/login', function(req, res, next) {
+  app.post('//api/login', function(req, res, next) {
     console.log('req.session: ' + JSON.stringify(req.session));
     passport.authenticate('local-login', function(err, user, password) {
       if (err) {
@@ -53,7 +53,7 @@ module.exports = function(app, passport) {
     })(req, res, next);
   });
 
-  app.get('/api/logout', function(req, res) {
+  app.get('//api/logout', function(req, res) {
     console.log('req.session: ' + JSON.stringify(req.session));
     req.logout();
     res.status(200).json({ status: 'Logged Out' });
@@ -72,7 +72,7 @@ module.exports = function(app, passport) {
     - put /fingers/:finger_id
     - delete /fingers/:finger_id
   */
-  app.get('/api/fingers', function(req, res) {
+  app.get('//api/fingers', function(req, res) {
     Fingerprint.find({}, function(err, fingers) {
       if (err) {
         res.send(err);
@@ -138,7 +138,7 @@ module.exports = function(app, passport) {
     });
   });
 
-  app.get('/api/fingers/:username', function(req, res) {
+  app.get('//api/fingers/:username', function(req, res) {
     console.log('find user');
     Fingerprint.find({username: req.params.username}, function(err, user) {
       if (err) {

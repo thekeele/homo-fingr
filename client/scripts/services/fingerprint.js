@@ -35,6 +35,6 @@ angular.module('homoFingr').factory('FingerprintService',
     }
 
     function getFingerprint(username) {
-      return $http.get('/api/fingers/' + username);
+      return $http.get('/fingers/api/fingers/' + username);
     }
 }]);
