@@ -72,16 +72,16 @@ module.exports = function(app, passport) {
     - put /fingers/:finger_id
     - delete /fingers/:finger_id
   */
-  // app.get('/api/fingers', function(req, res) {
-  //   Fingerprint.find({}, function(err, fingers) {
-  //     if (err) {
-  //       res.send(err);
-  //     }
+  app.get('/api/fingers', function(req, res) {
+    Fingerprint.find({}, function(err, fingers) {
+      if (err) {
+        res.send(err);
+      }
 
-  //     console.log('get fingers');
-  //     res.json(fingers);
-  //   })
-  // });
+      console.log('get fingers');
+      res.json(fingers);
+    })
+  });
 
   app.post('/api/fingers', function(req, res) {
     console.log('post fingers');
