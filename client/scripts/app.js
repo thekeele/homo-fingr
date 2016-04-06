@@ -2,7 +2,7 @@
 
 var homoFingr = angular.module('homoFingr', ['ngRoute']);
 
-homoFingr.config(function($routeProvider) {
+homoFingr.config(function($routeProvider, $locationProvider) {
   $routeProvider
     .when('/', {
       templateUrl: '../partials/home.html',
