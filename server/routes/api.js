@@ -157,6 +157,7 @@ module.exports = function(app, passport) {
         res.send(err);
       }
       console.log(ids.length + ' ids found');
+      ids = ids.map(function(id) { return ObjectId(id); });
       Fingerprint.find({device_id: {$in : ids}}, function(err, result) {
         if (err) {
           res.send(err);
