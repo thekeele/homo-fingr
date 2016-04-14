@@ -156,21 +156,14 @@ module.exports = function(app, passport) {
       if (err) {
         res.send(err);
       }
-      console.log(ids.length + ' ids');
-      fps = []
-      for (int i = 0; i < ids.length; i++) {
-        Fingerprint.find({device_id: ids[i]}, function(err, fp) {
-          console.log('found fp by device_id');
-          if (err) {
-            res.send(err);
-          }
-          fps.push(fp);
-        });
-      }
-      if ids.length === fps.length {
+      Fingerprint.find({device_id: {$in : ids}}, function(err, result) {
+        console.log('found fp by device_id');
+        if (err) {
+          res.send(err);
+        }
         console.log('found distinct fps');
-        res.status(200).json(fps);
-      }
+        res.status(200).json(result);
+      });
     });
   });
 
