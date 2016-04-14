@@ -1,7 +1,7 @@
 require 'rest-client'
 require 'json'
 
-url = 'http://dev.keele.me/fingers/api/fingers'
+url = 'http://dev.keele.me/fingers/api/distinct'
 response = RestClient.get(url)
 res = JSON.parse(response)
 
@@ -91,26 +91,26 @@ res.each do |fp|
   j = 0
 end
 
-puts train.length
-i = 0
-j = 0
-same = 0
-while i < train.length
-  while j < train.length
-    if i != j and train[i] == train[j]
-      puts "HERE"
-      puts i
-      puts j
-      puts train[i]
-      puts train[j]
-      same += 1
-    end
-    j += 1
-  end
-  i += 1
-  j = 0
-end
-puts same
+# puts train.length
+# i = 0
+# j = 0
+# same = 0
+# while i < train.length
+#   while j < train.length
+#     if i != j and train[i] == train[j]
+#       puts "HERE"
+#       puts i
+#       puts j
+#       puts train[i]
+#       puts train[j]
+#       same += 1
+#     end
+#     j += 1
+#   end
+#   i += 1
+#   j = 0
+# end
+# puts same
 
 puts 'feature: unique in set / total in set'
 puts 'user_agent: ' + user_agent.uniq.count.to_s + ' / ' + user_agent.count.to_s
