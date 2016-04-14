@@ -150,15 +150,27 @@ module.exports = function(app, passport) {
     });
   });
 
-  app.get('//api/fingers/distinct', function(req, res) {
-    console.log('find distinct devices');
-    Fingerprint.find().distinct('device_id', function(err, user) {
+  app.get('//api/distinct', function(req, res) {
+    console.log('finding distinct devices');
+    Fingerprint.find().distinct('device_id', function(err, ids) {
       if (err) {
         res.send(err);
       }
-
-      console.log('found distinct fps');
-      res.status(200).json(user);
+      console.log(ids.length + ' ids');
+      fps = []
+      for (int i = 0; i < ids.length; i++) {
+        Fingerprint.find({device_id: ids[i]}, function(err, fp) {
+          console.log('found fp by device_id');
+          if (err) {
+            res.send(err);
+          }
+          fps.push(fp);
+        });
+      }
+      if ids.length === fps.length {
+        console.log('found distinct fps');
+        res.status(200).json(fps);
+      }
     });
   });
 
