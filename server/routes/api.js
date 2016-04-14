@@ -150,6 +150,18 @@ module.exports = function(app, passport) {
     });
   });
 
+  app.get('//api/fingers/distinct', function(req, res) {
+    console.log('find distinct devices');
+    Fingerprint.find().distinct('device_id', function(err, user) {
+      if (err) {
+        res.send(err);
+      }
+
+      console.log('found distinct fps');
+      res.status(200).json(user);
+    });
+  });
+
   /*
     Middleware
     - ensures that a user is logged in
