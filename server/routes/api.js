@@ -150,21 +150,34 @@ module.exports = function(app, passport) {
     });
   });
 
+  // app.get('//api/distinct', function(req, res) {
+  //   console.log('finding distinct devices');
+  //   Fingerprint.find().distinct('device_id', function(err, ids) {
+  //     if (err) {
+  //       res.send(err);
+  //     }
+  //     console.log(ids.length + ' ids found');
+  //     Fingerprint.find({device_id: {$in: ids}}, function(err, result) {
+  //       if (err) {
+  //         res.send(err);
+  //       }
+  //       console.log(result.length + ' distinct fps found');
+  //       res.status(200).json(result);
+  //     });
+  //   });
+  // });
+
   app.get('//api/distinct', function(req, res) {
     console.log('finding distinct devices');
-    Fingerprint.find().distinct('device_id', function(err, ids) {
-      if (err) {
-        res.send(err);
-      }
-      console.log(ids.length + ' ids found');
-      Fingerprint.find({device_id: {$in: ids}}, function(err, result) {
+    Fingerprint.aggregate({ $group:
+      { _id: '$device_id', username: {$max: '$username'}, components: {$max: '$components'}}}, function(err, fps) {
         if (err) {
           res.send(err);
         }
-        console.log(result.length + ' distinct fps found');
-        res.status(200).json(result);
+
+        console.log(fps.length + ' distinct fps found');
+        res.status(200).json(fps);
       });
-    });
   });
 
   /*
