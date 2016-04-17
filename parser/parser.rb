@@ -9,6 +9,8 @@ url = 'http://dev.keele.me/fingers/api/distinct'
 response = RestClient.get(url)
 res = JSON.parse(response)
 
+puts "#{res.count} distinct fingerprints"
+
 # all data
 train = Array.new(res.count) { Array.new(8) }
 
