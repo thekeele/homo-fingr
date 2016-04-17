@@ -4,5 +4,5 @@
 */
 
 module.exports = {
-  'url': 'mongodb://localhost/fingers'
+  'url': 'mongodb://fpUser:fpPassw0rd@localhost:27017/fingers',
 };
