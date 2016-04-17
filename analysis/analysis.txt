@@ -1,0 +1,118 @@
+27 distinct fingerprints in set
+
+fingerprint: uniform in set / total in set
+uniform fp: 2 / 27
+uniform fp number: 3 6
+
+feature: unique in set / total in set
+user_agent: 22 / 27
+language: 3 / 27
+color_depth: 2 / 27
+resolution: 11 / 27
+timezone: 3 / 27
+platform: 5 / 27
+plugins: 11 / 27
+fonts: 16 / 27
+
+Max frequency feature, number of occurrences
+["Mozilla/5.0(X11;Linuxx86_64;rv:38.0)Gecko/20100101Firefox/38.0", 3]
+["en-US", 24]
+["24", 21]
+["19201080", 8]
+["240", 21]
+["Linuxx86_64", 9]
+["ChromePDFViewer::::application/pdf~pdfChromePDFViewer::PortableDocumentFormat::application/x-google-chrome-pdf~pdfNativeClient::::application/x-nacl~,application/x-pnacl~ShockwaveFlash::ShockwaveFlash21.0r0::application/x-shockwave-flash~swf,application/futuresplash~splWidevineContentDecryptionModule::EnablesWidevinelicensesforplaybackofHTMLaudio/videocontent.(version:1.4.8.866)::application/x-ppapi-widevine-cdm~",
+ 9]
+["ArialCourierCourierNewGeorgiaHelveticaMonacoPalatinoTahomaTimesTimesNewRomanVerdanaWingdings2Wingdings3",
+ 4]
+
+probability distribution for each fingerprint
+fp-> 0 probability-> 0.037037037037037035
+fp-> 1 probability-> 0.037037037037037035
+fp-> 2 probability-> 0.07407407407407407
+fp-> 3 probability-> 0.037037037037037035
+fp-> 4 probability-> 0.037037037037037035
+fp-> 5 probability-> 0.0
+fp-> 6 probability-> 0.037037037037037035
+fp-> 7 probability-> 0.037037037037037035
+fp-> 8 probability-> 0.037037037037037035
+fp-> 9 probability-> 0.037037037037037035
+fp-> 10 probability-> 0.037037037037037035
+fp-> 11 probability-> 0.037037037037037035
+fp-> 12 probability-> 0.037037037037037035
+fp-> 13 probability-> 0.037037037037037035
+fp-> 14 probability-> 0.037037037037037035
+fp-> 15 probability-> 0.037037037037037035
+fp-> 16 probability-> 0.037037037037037035
+fp-> 17 probability-> 0.037037037037037035
+fp-> 18 probability-> 0.037037037037037035
+fp-> 19 probability-> 0.037037037037037035
+fp-> 20 probability-> 0.037037037037037035
+fp-> 21 probability-> 0.037037037037037035
+fp-> 22 probability-> 0.037037037037037035
+fp-> 23 probability-> 0.037037037037037035
+fp-> 24 probability-> 0.037037037037037035
+fp-> 25 probability-> 0.037037037037037035
+fp-> 26 probability-> 0.037037037037037035
+
+Set probability 0.9999999999999993
+
+information gain from each fingerprint
+fp-> 0 information-> 0.1761069445245729
+fp-> 1 information-> 0.1761069445245729
+fp-> 2 information-> 0.27813981497507173
+fp-> 3 information-> 0.1761069445245729
+fp-> 4 information-> 0.1761069445245729
+fp-> 5 information-> 0
+fp-> 6 information-> 0.1761069445245729
+fp-> 7 information-> 0.1761069445245729
+fp-> 8 information-> 0.1761069445245729
+fp-> 9 information-> 0.1761069445245729
+fp-> 10 information-> 0.1761069445245729
+fp-> 11 information-> 0.1761069445245729
+fp-> 12 information-> 0.1761069445245729
+fp-> 13 information-> 0.1761069445245729
+fp-> 14 information-> 0.1761069445245729
+fp-> 15 information-> 0.1761069445245729
+fp-> 16 information-> 0.1761069445245729
+fp-> 17 information-> 0.1761069445245729
+fp-> 18 information-> 0.1761069445245729
+fp-> 19 information-> 0.1761069445245729
+fp-> 20 information-> 0.1761069445245729
+fp-> 21 information-> 0.1761069445245729
+fp-> 22 information-> 0.1761069445245729
+fp-> 23 information-> 0.1761069445245729
+fp-> 24 information-> 0.1761069445245729
+fp-> 25 information-> 0.1761069445245729
+fp-> 26 information-> 0.1761069445245729
+
+Set information 4.6808134280893965
+
+entropy for each fingerprint
+fp-> 0 entropy-> 0.03762314974311117
+fp-> 1 entropy-> 0.03762314974311117
+fp-> 2 entropy-> 0.05942125642222023
+fp-> 3 entropy-> 0.03762314974311117
+fp-> 4 entropy-> 0.03762314974311117
+fp-> 5 entropy-> 0.0
+fp-> 6 entropy-> 0.03762314974311117
+fp-> 7 entropy-> 0.03762314974311117
+fp-> 8 entropy-> 0.03762314974311117
+fp-> 9 entropy-> 0.03762314974311117
+fp-> 10 entropy-> 0.03762314974311117
+fp-> 11 entropy-> 0.03762314974311117
+fp-> 12 entropy-> 0.03762314974311117
+fp-> 13 entropy-> 0.03762314974311117
+fp-> 14 entropy-> 0.03762314974311117
+fp-> 15 entropy-> 0.03762314974311117
+fp-> 16 entropy-> 0.03762314974311117
+fp-> 17 entropy-> 0.03762314974311117
+fp-> 18 entropy-> 0.03762314974311117
+fp-> 19 entropy-> 0.03762314974311117
+fp-> 20 entropy-> 0.03762314974311117
+fp-> 21 entropy-> 0.03762314974311117
+fp-> 22 entropy-> 0.03762314974311117
+fp-> 23 entropy-> 0.03762314974311117
+fp-> 24 entropy-> 0.03762314974311117
+fp-> 25 entropy-> 0.03762314974311117
+fp-> 26 entropy-> 0.03762314974311117
