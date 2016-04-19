@@ -53,6 +53,9 @@ nav_freq = Hash.new(0)
 plugins_freq = Hash.new(0)
 fonts_freq = Hash.new(0)
 
+# uniform fingerprints
+uniform = []
+
 # array of probabilities for each feature
 probs = []
 
@@ -127,6 +130,7 @@ json_res.each do |fp|
   j = 0
 end # end response
 
+
 i = 0
 j = 0
 # each response
@@ -196,7 +200,6 @@ puts "\n"
 
 i = 0
 j = 0
-uniform = []
 while i < train.length
   while j < train.length
     if i != j and train[i] == train[j]
@@ -297,6 +300,8 @@ puts 'uniform test users'
 puts test_uniform
 puts "\n"
 
+# post homogenization
+# uniform = [0,1,2,3,4,5,6,7,8,9,10]
 puts 'probability distribution for each fingerprint'
 for i in 0..(n - 1)
   if uniform.include? i
