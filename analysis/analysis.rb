@@ -18,11 +18,20 @@ json_res = JSON.parse(rest_res)
 
 # n, number of items in the set
 n = json_res.count
+test_n = 11
 # f, number of features we are examining
 f = 8
+test_f = 9
+# boolean to add to test set
+test = false
+test_user = ''
 
 # all data, number of fingerprints X number of features
 train = Array.new(n) { Array.new(f) }
+
+# test data, subset of 5 users from train set
+test_unique = Array.new(test_n) { Array.new(test_f) }
+test_uniform = Array.new(test_n) { Array.new(test_f) }
 
 # array of feature strings
 user_agent = []
@@ -118,6 +127,72 @@ json_res.each do |fp|
   j = 0
 end # end response
 
+i = 0
+j = 0
+# each response
+json_res.each do |fp|
+  # each fingerprint
+  fp.each do |key, value|
+    if key == 'username' and (value == 'mkeele' or value =='blenderhead' or
+       value == 'naito' or value =='bolaptop' or value == 'loobell')
+         test_user = value
+    end
+
+    if !test_user.empty? and key == 'components'
+      test_unique[i][j] = test_user
+      j += 1
+      value.each do |comp|
+        if comp["key"] == 'user_agent'
+          # string
+          test_unique[i][j] = comp["value"].gsub(/\s+/, "").strip
+          j += 1
+        end
+        if comp["key"] == 'language'
+          # string
+          test_unique[i][j] = comp["value"].gsub(/\s+/, "").strip
+          j += 1
+        end
+        if comp["key"] == 'color_depth'
+          # integer
+          test_unique[i][j] = comp["value"].to_s.strip
+          j += 1
+        end
+        if comp["key"] == 'resolution'
+          # array
+          test_unique[i][j] = comp["value"].join('').strip
+          j += 1
+        end
+        if comp["key"] == 'timezone_offset'
+          # integer
+          test_unique[i][j] = comp["value"].to_s.strip
+          j += 1
+        end
+        if comp["key"] == 'navigator_platform'
+          # string
+          test_unique[i][j] = comp["value"].gsub(/\s+/, "").strip
+          j += 1
+        end
+        if comp["key"] == 'regular_plugins'
+          # array
+          test_unique[i][j] = comp["value"].sort.join('').gsub(/\s+/, "").strip
+          j += 1
+        end
+        if comp["key"] == 'js_fonts'
+          # array
+          test_unique[i][j] = comp["value"].sort.join('').gsub(/\s+/, "").strip
+          j += 1
+        end
+      end
+      i += 1
+    end
+  end # end fingerprint
+  j = 0
+  test_user = ''
+end # end response
+
+puts 'unique test users'
+puts test_unique
+puts "\n"
 
 i = 0
 j = 0
@@ -169,7 +244,7 @@ js_fonts.each{|fonts| fonts_freq[fonts] += 1}
 # pp plugins_freq
 # pp fonts_freq
 
-puts 'Max frequency feature, number of occurrences'
+# puts 'Max frequency feature, number of occurrences'
 pp ua_freq.max_by{|k,v| v}
 pp lang_freq.max_by{|k,v| v}
 pp color_freq.max_by{|k,v| v}
@@ -178,6 +253,48 @@ pp time_freq.max_by{|k,v| v}
 pp nav_freq.max_by{|k,v| v}
 pp plugins_freq.max_by{|k,v| v}
 pp fonts_freq.max_by{|k,v| v}
+puts "\n"
+
+i = 0
+j = 0
+
+while i < test_n
+  while j < test_f
+    if j == 0
+      test_uniform[i][j] = test_unique[i][j]
+    end
+    if j == 1
+      test_uniform[i][j] = ua_freq.max_by{|k,v| v}[0]
+    end
+    if j == 2
+      test_uniform[i][j] = lang_freq.max_by{|k,v| v}[0]
+    end
+    if j == 3
+      test_uniform[i][j] = color_freq.max_by{|k,v| v}[0]
+    end
+    if j == 4
+      test_uniform[i][j] = res_freq.max_by{|k,v| v}[0]
+    end
+    if j == 5
+      test_uniform[i][j] = time_freq.max_by{|k,v| v}[0]
+    end
+    if j == 6
+      test_uniform[i][j] = nav_freq.max_by{|k,v| v}[0]
+    end
+    if j == 7
+      test_uniform[i][j] = plugins_freq.max_by{|k,v| v}[0]
+    end
+    if j == 8
+      test_uniform[i][j] = fonts_freq.max_by{|k,v| v}[0]
+    end
+    j += 1
+  end
+  i += 1
+  j = 0
+end
+
+puts 'uniform test users'
+puts test_uniform
 puts "\n"
 
 puts 'probability distribution for each fingerprint'
