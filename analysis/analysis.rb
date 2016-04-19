@@ -47,10 +47,7 @@ fonts_freq = Hash.new(0)
 # array of probabilities for each feature
 probs = []
 
-# information gain from each fingerprint
-information = []
-
-# entropy for each fingerprint
+# entropy from each fingerprint
 entropy = []
 
 
@@ -185,10 +182,8 @@ puts "\n"
 
 puts 'probability distribution for each fingerprint'
 for i in 0..(n - 1)
-  if i == (uniform[0] - 1)
-    probs[i] = 2.0/27
-  elsif i == (uniform[1] - 1)
-    probs[i] = 0.0/27
+  if uniform.include? i
+    probs[i] = (uniform.count * 1.0)/27
   else
     probs[i] = 1.0/27
   end
@@ -203,26 +198,20 @@ puts "\n"
 puts "Set probability #{set_prob}"
 puts "\n"
 
-puts 'information gain from each fingerprint'
+puts 'entropy from each fingerprint'
 for i in 0..(n - 1)
   if probs[i] != 0
-    information[i] = (1 * probs[i]) * Math.log2(1.0/probs[i])
+    entropy[i] = -1 * (probs[i] * Math.log2(probs[i]))
   else
-    information[i] = 0
+    entropy[i] = 0
   end
 
-  puts "fp-> #{i} information-> #{information[i]}"
-end
-
-
-set_info = information.inject(0){|sum, x| sum + x }
-
-puts "\n"
-puts "Set information #{set_info}"
-puts "\n"
-
-puts 'entropy for each fingerprint'
-for i in 0..(n - 1)
-  entropy[i] = information[i] / set_info
   puts "fp-> #{i} entropy-> #{entropy[i]}"
 end
+
+
+set_entropy = entropy.inject(0){|sum, x| sum + x }
+
+puts "\n"
+puts "Set entropy #{set_entropy}"
+puts "\n"
