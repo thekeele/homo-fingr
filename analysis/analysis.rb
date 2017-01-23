@@ -301,7 +301,7 @@ puts test_uniform
 puts "\n"
 
 # post homogenization
-# uniform = [0,1,2,3,4,5,6,7,8,9,10]
+uniform = [0,1,2,3,4,5,6,7,8,9,10]
 puts 'probability distribution for each fingerprint'
 for i in 0..(n - 1)
   if uniform.include? i
